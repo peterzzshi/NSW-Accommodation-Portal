@@ -1,0 +1,182 @@
+{% extends "base.jinja2" %}
+
+
+{% block head %}
+
+    <title>Edit room</title>
+
+{% endblock %}
+
+
+{% block body %}
+
+
+
+    <div class="text-center m-3">
+        <form action="{{ url_for("edit_room", id=id) }}" method="post">
+            <div class="form-group row justify-content-center">
+                <div class="col-2 align-self-center">
+                    <h5>Title*:</h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <input class="form-control" type="text" value="{{ content.house_name }}" required name="house_name">
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <div class="col-2 align-self-center">
+                    <h5>Description:</h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <textarea class="form-control" required name="description">{{ content.description }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <div class="col-2 align-self-center">
+                    <h5>Photos*:</h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <textarea class="form-control" name="photos" required placeholder="please enter the photo urls, separated by new line"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <div class="col-2 align-self-center">
+                    <h5>Type*:</h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <select class="form-control" required name="type">
+                        <option disabled selected value>Please select your house type</option>
+                        <option value="house">house</option>
+                        <option value="apartment">apartment</option>
+                        <option value="townhouse">townhouse</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <div class="col-2 align-self-center">
+                    <h5>Price*:</h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <input class="form-control" value="{{ content.price }}" type="text" required name="price">
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <div class="col-2 align-self-center">
+                    <h5>Room arrangement*:</h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="room_arrangement" value="single"> Single bed
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="room_arrangement" value="double"> Double bed
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="room_arrangement" value="queen"> Queen bed
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="room_arrangement" value="king"> King bed
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="room_arrangement" value="sofa bed"> Sofa bed
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="room_arrangement" value="floor mattresses"> Floor mattresses
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <div class="col-2 align-self-center">
+                    <h5>Common Space: </h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="common_space" value="single"> Single bed
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="common_space" value="double"> Double bed
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="common_space" value="queen"> Queen bed
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="common_space" value="king"> King bed
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="common_space" value="sofa bed"> Sofa bed
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="common_space" value="floor mattresses"> Floor mattresses
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="form-group row justify-content-center">
+                <div class="col-2 align-self-center">
+                    <h5>No.of Bathrooms:</h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <input class="form-control" type="number" value="{{ content.bath_number }}" required name="bath_number" min="0">
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <div class="col-2 align-self-center">
+                    <h5>Max people:</h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <input class="form-control" type="number" required value="{{ content.max_people }}" name="max_people" min="0">
+                </div>
+            </div>
+            <div class="form-group row justify-content-center">
+                <div class="col-2 align-self-center">
+                    <h5>Amenities:</h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="amenities" value="Wireless Internet"> Wireless Internet
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="amenities" value="Air conditioning"> Air conditioning
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="amenities" value="TV"> TV
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="amenities" value="Laptop friendly workspace"> Laptop friendly workspace
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="amenities" value="Hot water"> Hot water
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="amenities" value="Heating"> Heating
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="amenities" value="Free parking"> Free parking
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="amenities" value="Lift"> Lift
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="amenities" value="Kitchen"> Kitchen
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="amenities" value="Smoke detector"> Smoke detector
+                    </label>
+                </div>
+            </div>
+
+            <button class="btn btn-block btn-primary">Update listing</button>
+        </form>
+    </div>
+
+
+
+
+{% endblock %}

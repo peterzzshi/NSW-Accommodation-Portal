@@ -1,0 +1,103 @@
+{% extends "base.jinja2" %}
+
+
+{% block head %}
+
+    <title>Search Results</title>
+    <meta id="keyword" data-name="{{ keyword }}">
+
+{% endblock %}
+
+
+{% block body %}
+
+
+
+    <div class="container">
+        <form id="rooms-search">
+
+
+            <div class="justify-content-center row m-3">
+
+                <div class="col-2 align-self-center">
+                    <h5>Check-in date</h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <input class="form-control" type="date" name="start_date">
+                </div>
+                <div class="col-2 align-self-center">
+                    <h5>Check-out date:</h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <input class="form-control" type="date" name="end_date">
+                </div>
+            </div>
+
+            <div class="justify-content-center row m-3">
+                <div class="col-1 align-self-center">
+                    <h5>Type:</h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <select class="" required name="type">
+                        <option disabled selected value>Please select the house type</option>
+                        <option value="house">house</option>
+                        <option value="apartment">apartment</option>
+                        <option value="townhouse">townhouse</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="justify-content-center row m-3">
+                <div class="col-2 align-self-center">
+                    <h5>Minimum price:</h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <input class="form-control" type="text" required name="price_start">
+                </div>
+
+                <div class="col-2 align-self-center">
+                    <h5>Maximum price:</h5>
+                </div>
+                <div class="col-4 align-self-center">
+                    <input class="form-control" type="text" required name="price_end">
+                </div>
+            </div>
+            <div class="row justify-content-center mb-5">
+                    <span class="btn btn-info btn-lg" id="filter">Filter</span>
+            </div>
+        </form>
+
+
+    </div>
+
+
+    <ul>
+        {% for item in items %}
+            <li>
+                <div class="row search-items" id="{{ item.id }}">
+
+                    <div class="col-4">
+                        <a href="{{ url_for("room", id=item.id) }}"><img class="img-thumbnail" src="{{ item.image }}" alt="{{ item.name }}"></a>
+                    </div>
+
+
+                    <div class="col-6 d-flex align-items-center">
+                        <a href="{{ url_for("room", id=item.id) }}"><h4>{{ item.name }}</h4></a>
+                    </div>
+
+                    <div class="col-2 d-flex align-items-center">
+                        <h5>$ {{ item.price }} per night</h5>
+                    </div>
+
+                    <hr>
+                </div>
+
+            </li>
+
+        {% endfor %}
+    </ul>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='filter.js') }}"></script>
+
+{% endblock %}

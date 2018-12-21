@@ -1,0 +1,231 @@
+{% extends "base.jinja2" %}
+
+
+{% block head %}
+
+    <meta id="address" data-name="{{ address }}">
+    <meta id="title" data-name="{{ title }}">
+    <meta id="description" data-name="{{ description }}">
+    <meta id="home_id" data-name="{{ home_id }}">
+    <meta id="hoster_id" data-name="{{ hoster_id }}">
+
+
+    <img src="" alt="">
+    <meta id="user_id" data-name="{{ session["user_id"] }}">
+
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+
+    {#    <link rel="stylesheet" href="{{ url_for('static', filename='calendar.css') }}">#}
+    <link rel="stylesheet" href="{{ url_for('static', filename='reviews.css') }}">
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyLZqrPCWCttCdtcIEBR3euMkV41CQ0bI&callback=initMap" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='lib/gmaps.js') }}"></script>
+
+
+
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="container">
+
+
+        <div class="row">
+            <div class="scroll-container">
+                {% for photo in content.house_photo %}
+                    <img class="img-thumbnail" src={{ photo }} alt="{{ photo }}">
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-8">
+                <h1>{{ title }}</h1>
+
+                <h3>Type: <strong>{{ type }}</strong> </h3>
+
+                <p>Description: {{ content.description }}</p>
+
+                <p>No of Bathrooms: {{ content.bath_number }}</p>
+                <p>Maximum no. of people allowed: {{ content.max_people }}</p>
+                <div class="row">
+                    <div class="col-4 text-center">
+                        <ul>
+                            <h5>Room Arrangement</h5>
+                            {% for bed in content.room_arrangement[0] %}
+                                <li>
+                                    {{ bed }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="col-4 text-center">
+                        <ul>
+                            <h5>Common Space</h5>
+                            {% for bed in content.common_spaces %}
+                                <li>
+                                    {{ bed }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="col-4 text-center">
+                        <ul>
+                            <h5>Amenities</h5>
+                            {% for amenity in content.amenities %}
+                                <li>
+                                    {{ amenity }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-4">
+                {% if session["user_id"] != content.hoster_id %}
+
+                    <span class="font-weight-bold display-4">$ {{ content.price }}</span> per night
+
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <h5>Checkin-date:</h5>
+                        </div>
+                        <div class="col-4">
+                            <input class="avalCall" id="checkin-date"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <h5>Checkout-date:</h5>
+                        </div>
+                        <div class="col-4">
+                            <input class="avalCall" id="checkout-date"/>
+                        </div>
+                    </div>
+                    <button class="btn btn-block btn-secondary" id="submit_dates">Confirm dates</button>
+
+                {% else %}
+                    <h4>
+                        This is my own apartment
+                    </h4>
+                {% endif %}
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <h4>This accommodation is located in {{ suburb }}, {{ city }}</h4>
+
+            <div class="col-8">
+                <div id="map"></div>
+            </div>
+
+        </div>
+
+
+
+        <!--
+        D'ont forget to Load jQuery and jQuery UI
+        -->
+
+
+
+
+        <h3>Reviews</h3>
+        Below are the reviews of this home.
+
+        <ul id="reviews">
+            {#            <li>#}
+            {#                This is a great house#}
+            {##}
+            {#                <span class='stars text-center'>#}
+            {#                <ul class='display'>#}
+            {#                    <li class='star' data-value='1'>#}
+            {#                        <i class='fa fa-star fw'></i>#}
+            {#                    </li>#}
+            {#                    <li class='star' data-value='2'>#}
+            {#                        <i class='fa fa-star fw'></i>#}
+            {#                    </li>#}
+            {#                    <li class='star' data-value='3'>#}
+            {#                        <i class='fa fa-star fw'></i>#}
+            {#                    </li>#}
+            {#                    <li class='star' data-value='4'>#}
+            {#                        <i class='fa fa-star fw'></i>#}
+            {#                    </li>#}
+            {#                    <li class='star' data-value='5'>#}
+            {#                        <i class='fa fa-star fw'></i>#}
+            {#                    </li>#}
+            {#                </ul>#}
+            {#            </span>#}
+            {##}
+            {#                by Holmes#}
+            {##}
+            {#            </li>#}
+        </ul>
+
+
+
+        {#        <div class="row">#}
+        {#            <div class="col-8">#}
+        {#                <section id="review">#}
+        {##}
+        {#            <div class='stars text-center'>#}
+        {#                <ul class='rating'>#}
+        {#                    <li class='star' data-value='1'>#}
+        {#                        <i class='fa fa-star fa-fw'></i>#}
+        {#                    </li>#}
+        {#                    <li class='star' data-value='2'>#}
+        {#                        <i class='fa fa-star fa-fw'></i>#}
+        {#                    </li>#}
+        {#                    <li class='star' data-value='3'>#}
+        {#                        <i class='fa fa-star fa-fw'></i>#}
+        {#                    </li>#}
+        {#                    <li class='star' data-value='4'>#}
+        {#                        <i class='fa fa-star fa-fw'></i>#}
+        {#                    </li>#}
+        {#                    <li class='star' data-value='5'>#}
+        {#                        <i class='fa fa-star fa-fw'></i>#}
+        {#                    </li>#}
+        {#                </ul>#}
+        {#            </div>#}
+        {##}
+        {#                    <textarea class="form-control" id="reviewInput" cols="75" rows="5" placeholder="Write your reviews here"></textarea>#}
+        {#                    <br>#}
+        {#                    <button class="btn btn-block btn-info" id="submit-review">Submit</button>#}
+        {#                    <div class='success-box'>#}
+        {#                        <div class='text-message'></div>#}
+        {#                    </div>#}
+        {##}
+        {#                </section>#}
+        {#            </div>#}
+        {#        </div>#}
+        {##}
+
+
+
+
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+        <script type="text/javascript" src="{{ url_for('static', filename='reviews.js') }}"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename='calendar.js') }}"></script>
+
+        <script type="text/javascript" src="{{ url_for('static', filename='map.js') }}"></script>
+
+
+
+
+
+{% endblock %}

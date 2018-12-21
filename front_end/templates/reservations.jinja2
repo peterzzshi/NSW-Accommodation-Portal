@@ -1,0 +1,85 @@
+{% extends "base.jinja2" %}
+
+
+{% block head %}
+
+    <title>Reservations</title>
+
+
+{% endblock %}
+
+
+{% block body %}
+
+
+
+    <h1>Trips</h1>
+    <div class="container">
+        {% for reservation in reservations %}
+            {% if reservation.trip_or_not %}
+                <li>
+                    <div class="row {% if reservation.status == "declined" %} text-muted {% endif %}">
+                        <div class="col-8 align-self-center">
+                            <h4>Stay at: <a href="{{ url_for("room", id=reservation.house_id) }}">{{ reservation.house_name }}</a></h4>
+                            <h6>from {{ reservation.start_date }}(<span prettydate> {{ reservation.start_date }} </span>) to {{ reservation.end_date }} (<span prettydate>{{ reservation.end_date }} </span>)</h6>
+                        </div>
+                        <div class="col-2 align-self-center">
+                            <h5 class="text-center text-capitalize">
+                                {% if reservation.status == "declined" %}
+                                    unavailable
+                                {% else %}
+                                    {{ reservation.status }}
+                                {% endif %}
+                            </h5>
+                        </div>
+                        <div class="col-2 align-self-center">
+                            <button class="btn btn-danger actions btn-sm btn-block" {% if reservation.status == "declined" %} disabled {% endif %} id="{{ reservation.transaction_id }}" onclick="deletetrip(this)">Cancel</button>
+                        </div>
+                    </div>
+                    <hr>
+                </li>
+
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <h1>Bookings</h1>
+    <div class="container">
+        {% for reservation in reservations %}
+            <meta id="transaction_id" data-name="{{ reservation.transaction_id }}">
+            {% if not reservation.trip_or_not %}
+                <li id="{{ reservation.transaction_id }}">
+
+                    <div class="row">
+                        <div class="col-1 align-self-center">
+                            <figure>
+                                <a href="{{ url_for("profile", id=reservation.user_id) }}">
+                                    <img class="figure-img img-fluid rounded img-thumbnail" src="{{ reservation.user_photo }} " alt="">
+                                    <figcaption class="figure-caption text-center">{{ reservation.user_name }}</figcaption>
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="col-7 align-self-center">
+                            <h4><strong>{{ reservation.house_name }}</strong></h4>
+                            <h6>from {{ reservation.start_date }} (<span prettydate> <em> {{ reservation.start_date }} </em> </span>) to {{ reservation.end_date }} (<span prettydate><em> {{ reservation.end_date }}</em></span>)</h6>
+                        </div>
+
+                        <div class="col-2 align-self-center {% if reservation.status == "accepted" %} text-success {% elif reservation.status == "declined"%} text-secondary {% else %} text-dark {% endif %}">
+                            <h5 class="text-capitalize text-center">{{ reservation.status }}</h5>
+                        </div>
+
+                        <div class="col-2 align-self-center">
+                            <button class="accept btn btn-primary actions btn-block" {% if reservation.status != "pending" %} disabled {% endif %}>Accept</button>
+                            <button class="decline btn btn-warning actions btn-block" {% if reservation.status != "pending" %} disabled {% endif %}>Decline</button>
+                        </div>
+                    </div>
+                    <hr>
+                </li>
+            {% endif %}
+
+        {% endfor %}
+    </div>
+
+
+
+{% endblock %}

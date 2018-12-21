@@ -1,0 +1,47 @@
+/*section {*/
+    /*font-family:"Open Sans", Helvetica, Arial, sans-serif;*/
+    /*color:#555;*/
+    /*max-width:680px;*/
+    /*margin:0 auto;*/
+    /*padding:0 20px;*/
+/*}*/
+
+/* Rating Star Widgets Style */
+.stars {
+    color:#ccc;
+}
+
+.stars ul > li.star {
+    display:inline-block;
+}
+
+.rating {
+    font-size:30px;
+}
+
+/* Hover state of the stars */
+.rating > li.star.hover > i.fa {
+    color:#FFCC36;
+}
+
+
+/* Selected state of the stars */
+.selected > i.fa {
+    color:#FF912C;
+}
+
+
+
+
+.success-box {
+    margin:50px 0;
+    padding:10px 10px;
+    border:1px solid #eee;
+    background:#f9f9f9;
+}
+
+.success-box > div {
+    vertical-align:top;
+    display:inline-block;
+    color:#888;
+}

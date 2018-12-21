@@ -1,0 +1,42 @@
+{% extends "base.jinja2" %}
+
+
+{% block head %}
+
+    <title>Profile dashboard for {{ content.name }}</title>
+
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="container m-4">
+        <div class="row">
+            <h1>Profile dashboard for {{ content.name }}</h1>
+        </div>
+        <div class="row">
+            <img src="{{ content.photo }}" alt="" class="col-6">
+            <div class="col-6">
+                <h1>Gender</h1>
+                {% if content.gender == "M" %}
+                    <i class="fas fa-male"></i> Male
+                {% else %}
+                    <i class="fas fa-female"></i>Female
+                {% endif %}
+                <h1>DOB</h1>
+                {{ content.date_of_birth }}
+                <h1>Description</h1>
+                <p>{{ content.self_description }}</p>
+
+                {% if session["user_id"]|int == id|int %}
+                    <a href="{{ url_for('edit_profile', id=id) }}"><button>Edit Profile</button></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.jinja2" %}
+
+
+{% block head %}
+
+    <title>Listings</title>
+
+{% endblock %}
+
+
+{% block body %}
+
+    <h1>Below is are all the rooms being listed</h1>
+    <div class="container">
+        <ul>
+            {% for item in items %}
+                <li>
+                    <div class="row">
+                        <div class="col-2">
+                            <a href="{{ url_for("room", id=item.house_id) }}"><img class="img-thumbnail" src="{{ item.house_photo }}" alt="{{ item.house_name }}"></a>
+                        </div>
+                        <div class="col-8 d-flex align-items-center">
+                            <a href="{{ url_for("room", id=item.house_id) }}"><h4>{{ item.house_name }}</h4></a>
+                        </div>
+                        <div class="col-2 align-bottom">
+                            <a href="{{ url_for("edit_room", id=item.house_id) }}"><button class="actions btn btn-primary btn-block">Edit</button></a>
+                            <button class="actions btn btn-danger btn-block" id="{{ item.house_id }}" onclick="deleteroom(this)">Delete</button>
+                        </div>
+
+                    </div>
+                </li>
+                <hr>
+
+            {% endfor %}
+        </ul>
+        <div class="row m-5">
+            <div class="col-12">
+                <a href="{{ url_for('add_room') }}"><button class="btn btn-secondary btn-block ">Add a listing</button></a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+{% endblock %}

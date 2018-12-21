@@ -1,0 +1,160 @@
+body {
+    font-family: 'PT Sans', sans-serif;
+    /*background-image: url(http://blog.visme.co/wp-content/uploads/2016/09/website3.png);*/
+    background-size: cover;
+    /*background-color: #659DBD;*/
+}
+.jumbotron {
+    /*background-image: linear-gradient(transparent, lightskyblue, transparent);*/
+    text-align: center;
+    /*position: fixed;*/
+    /*background-color: #659DBD;*/
+    /*color: white;*/
+}
+
+
+
+.navbar {
+    background-color: transparent;
+    background-image: linear-gradient(#f0faff, #bce3f1);
+}
+
+.navigator {
+    /*margin-top: 100px;*/
+    text-align: center;
+    font-size: x-large;
+}
+
+
+
+.navigator span{
+    color: white;
+    display: inline-block;
+    width: 33%;
+}
+
+
+li {
+    list-style-type: none;
+}
+
+
+.profile  {
+    height: 400px;
+    width: 400px;
+}
+
+
+.scroll-container {
+    height: 400px;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+
+.scroll-container img {
+    position: relative;
+    display: inline-block;
+    /*margin: 8px 8px;*/
+    /*box-shadow: 2px 2px 4px #bbb;*/
+    /*border-top-right-radius: 4px;*/
+    height: 100%;
+    vertical-align: bottom;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+
+.dropdown-content a {
+    color: grey;
+    padding: 8px 8px;
+}
+
+.dropdown:hover
+.dropdown-content {
+    display: block;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+
+
+
+
+#rooms figure img {
+    width: 100%;
+}
+
+#rooms figure figcaption {
+    font-size: 20px;
+}
+
+
+#posts img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+
+
+
+.post {
+    border: 1px solid green;
+    margin: auto;
+}
+
+
+
+
+#loading {
+    display: none;
+    text-align: center;
+}
+
+
+#map{
+    height: 400px;
+    width: 100%;
+}
+
+.profile-image {
+    width: 30px;
+    height: 30px;
+}
+
+
+
+
+.form-check-label {
+    font-size: medium;
+    padding: 0 10px;
+}
+
+
+
+
+
+.dp-highlight .ui-state-default {
+    background: #484;
+    color: #FFF;
+}
+.ui-datepicker.ui-datepicker-multi  {
+    width: 100% !important;
+}
+.ui-datepicker-multi .ui-datepicker-group {
+    float:none;
+}
+#datepicker {
+    height: 500px;
+    overflow-x: scroll;
+    width: 100%;
+}
+.ui-widget { font-size: 100% }

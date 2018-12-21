@@ -1,0 +1,42 @@
+{% extends "base.jinja2" %}
+
+
+{% block head %}
+
+    <title>Login Page</title>
+
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="text-center m-5">
+        <form action="{{ url_for("login") }}" method="post">
+            <div class="form-group row justify-content-center">
+                <div class="col-2 align-self-center">
+                    <h5>Email*:</h5>
+                </div>
+                <div class="col-3">
+                    <input class="form-control" type="email" name="email" placeholder="your@email.com" autofocus required>
+                </div>
+            </div>
+            <div class="form-group row justify-content-center">
+                <div class="col-2 align-self-center">
+                    <h5>Password*:</h5>
+                </div>
+                <div class="col-3">
+                    <input class="form-control" type="password" name="password" required placeholder="Password">
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-5">
+                    <button class="btn btn-primary btn-block" type="submit">Sign In</button>
+                </div>
+            </div>
+        </form>
+        <div class="row justify-content-center m-2">
+            <h5>Don't have an account? Sign up <a href="{{ url_for("signup") }}">here</a></h5>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,188 @@
+{% extends "base.jinja2" %}
+
+
+{% block head %}
+
+    <title>Holiday Rentals, Homes, and more</title>
+
+{% endblock %}
+
+
+{% block body %}
+
+    <h1>Search results here</h1>
+
+    <div class="form-page row text-center">
+
+
+
+
+        <div class="col-6">
+            <h2>Search room</h2>
+            <form id="rooms-search">
+                <div class="form-group">
+                    <label class="form-label">
+                        Keyword:
+                        <input class="form-control" type="text" name="key_word">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">
+                        Start date:
+                        <input class="form-control" type="date" name="start_date">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        End date:
+                        <input class="form-control" type="date" name="end_date">
+                    </label>
+                </div>
+                <label class="form-label">Type:
+                    <select class="form-control" required name="type">
+                        <option disabled selected value>Please select the house type</option>
+                        <option value="house">house</option>
+                        <option value="apartment">apartment</option>
+                        <option value="townhouse">townhouse</option>
+                    </select>
+                </label>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Minimum price: <input class="form-control" type="text" required name="price_start">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Maximum price: <input class="form-control" type="text" required name="price_end">
+                    </label>
+                </div>
+
+                <span class="btn" id="search-rooms" style="color: white"><h4>Search</h4> </span>
+            </form>
+
+
+
+            <ul id="rooms-search-result">
+
+            </ul>
+        </div>
+
+        <div class="col-6">
+            <h2>Search posts</h2>
+            <form id="posts-search">
+                <div class="form-group">
+                    <label class="form-label">
+                        Keyword:
+                        <input class="form-control" type="text" name="key_word">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">
+                        Start date:
+                        <input class="form-control" type="date" name="start_date">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        End date:
+                        <input class="form-control" type="date" name="end_date">
+                    </label>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Minimum price: <input class="form-control" type="text" required name="price_start">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Maximum price: <input class="form-control" type="text" required name="price_end">
+                    </label>
+                </div>
+
+
+                <span class="btn" id="search-posts" style="color: white"><h4>Search</h4> </span>
+            </form>
+
+
+            <ul id="posts-search-result">
+
+            </ul>
+        </div>
+
+    </div>
+
+
+
+
+    <script>
+        $("#search-rooms").click(function () {
+            var searchinfo = $("#rooms-search").serialize();
+            console.log(searchinfo);
+            var url = "http://13.210.33.67:5000/Search?" + searchinfo;
+            {#console.log(url);#}
+            $.get(url)
+                .done(function (data) {
+                    var items = data["items"];
+                    for (var i = 0; i < items.length; i++) {
+
+                        var id = items[i]["id"];
+                        var name = items[i]["name"];
+                        var image = items[i]["image"];
+                        var price = items[i]["price"];
+
+                        const result = $('<a href=rooms/' + id + '><li><img style="height: 50px; width: 50px" src=' + image + 'alt=""> ' + name + '$' + price + '</li></a>');
+                        $("#rooms-search-result").append(result);
+                        console.log(items[i]);
+                    }
+                })
+            ;
+        })
+
+
+        $("#search-posts").click(function () {
+            var searchinfo = $("#posts-search").serialize();
+            console.log(searchinfo);
+            var url = "http://13.210.33.67:5000/SearchPost?" + searchinfo;
+            console.log(url);
+            $.get(url)
+                .done(function (data) {
+                    console.log(data);
+                    var posts = data["posts"];
+                    console.log(posts);
+
+                    for (var i = 0; i < posts.length; i++) {
+                        console.log(posts[i]);
+
+
+                        var user_id = posts[i]["user_id"];
+                        var city = posts[i]["city"];
+                        var image = posts[i]["image"];
+                        var price_start = posts[i]["price_start"];
+                        var price_end = posts[i]["price_end"];
+                        var suburb = posts[i]["suburb"];
+                        var start_date = posts[i]["start_date"];
+                        var end_date = posts[i]["end_date"];
+                        var people_number = posts[i]["people_number"];
+                        var post_date = posts[i]["post_date"];
+
+
+                        {#const result = $('<a href=rooms/' + id + '><li><img src=' + image + 'alt="">' + name + '$' + price + '</li></a>');#}
+                        {#$("#rooms-search-result").append(result);#}
+
+                    }
+                })
+            ;
+        })
+
+
+    </script>
+
+
+{% endblock %}
